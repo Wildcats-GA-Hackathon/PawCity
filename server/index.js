@@ -1,18 +1,23 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
 const app = express();
 dotenv.config();
 
+app.use(express.json());
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
-const PORT = process.env.PORT || 5000;
+const requestLogger = require('./middleware/request_logger');
+app.use(requestLogger);
 
-mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-    .catch((error) => console.log(error.message))
+const userControllers = require('./controllers/users.js');
+app.use('/users', userControllers);
 
+const { handleErrors } = require('./middleware/custom_errors');
+app.use(handleErrors);
 
+app.listen(process.env.PORT || 5000, () => {
+	console.log('App Launched');
+});
