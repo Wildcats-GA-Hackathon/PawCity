@@ -27,8 +27,13 @@ const UserSchema = new Schema(
 			virtuals: true,
 			transform: (_doc, ret) => {
 				delete ret.password;
+				mongoose.Schema;
 				return ret;
 			},
 		},
 	}
 );
+
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;

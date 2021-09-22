@@ -15,7 +15,7 @@ const options = {
 
 const User = require('../models/user');
 
-const strategy = new Strategy(opts, function (jwt_payload, done) {
+const strategy = new Strategy(options, function (jwt_payload, done) {
 	User.findById(jwt_payload.id)
 		.then((user) => done(null, user))
 		.catch((err) => done(err));
