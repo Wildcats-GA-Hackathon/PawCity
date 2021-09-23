@@ -58,6 +58,7 @@ export default function FixedBottomNavigation() {
                     <BottomNavigationAction label="Home" icon={<HomeIcon />} />
                     <BottomNavigationAction label="Search" icon={<SearchIcon />} />
                     <BottomNavigationAction label="Map" icon={<MapIcon />} />
+                    <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
                 </BottomNavigation>
             </Paper>
         </Box>
