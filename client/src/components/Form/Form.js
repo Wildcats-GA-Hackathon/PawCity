@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import useStyles from './styles';
 import Input from './Input';
@@ -6,6 +6,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const Form = () => {
 	const [isSignedUp, setIsSignedUp] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 	// const [isLoggedIn, setIsLoggedIn] = useState(false)
 
 	// useEffect(() => {
@@ -15,6 +16,8 @@ const Form = () => {
 	//         setIsLoggedIn(false)
 	//     }
 	// }, [])
+
+	const handleShowPassword = () => setShowPassword(!showPassword);
 
 	const handleSubmit = () => {
 
@@ -37,49 +40,20 @@ const Form = () => {
 				<form className={classes.form} onSubmit={handleSubmit}>
 					<Grid container spacing={2}>
 						{!isSignedUp ? (
-							<Container>
-								<Input
-									name='firstName'
-									label='First Name'
-									handleChange={handleChange}
-								/>
-								<Input
-									name='lastName'
-									label='Last Name'
-									handleChange={handleChange}
-								/>
-								<Input
-									name='email'
-									label='Email'
-									handleChange={handleChange}
-								/>
-								<Input
-									name='password'
-									label='Password'
-									handleChange={handleChange}
-								/>
-								<Input
-									name='confirmPassword'
-									label='Confirm Password'
-									handleChange={handleChange}
-								/>
-							</Container>
+							<Fragment>
+								<Input name='firstName' label='First Name' handleChange={handleChange}/>
+								<Input name='lastName' label='Last Name' handleChange={handleChange}/>
+								<Input name='email' label='Email' handleChange={handleChange} />
+								<Input name='password' label='Password' handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword}  />
+								<Input name='confirmPassword' label='Confirm Password' handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+							</Fragment>
 						) : (
-							<Container>
-								<Input
-									name='email'
-									label='Email'
-									handleChange={handleChange}
-								/>
-								<Input
-									name='password'
-									label='Password'
-									Log
-									In
-									handleChange={handleChange}
-								/>
-							</Container>
+							<Fragment>
+								<Input name='email' label='Email' handleChange={handleChange} />
+									<Input name='password' label='Password' handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword}/>
+							</Fragment>
 						)}
+						</Grid>
 						<Button type='submit' fullwidth variant='contained' color='primary' className={classes.submit}>
 							{!isSignedUp ? 'Sign Up' : 'Sign In'}
 						</Button>
@@ -90,113 +64,10 @@ const Form = () => {
 								</Button>
 							</Grid>
 						</Grid>
-					</Grid>
 				</form>
 			</Paper>
 		</Container>
 	);
-
-	// if (isSignedUp === false) {
-	// 	return (
-	// 		//Show signupform
-	// 		<div>
-	// 			<Container>
-	// 				<TextField
-	// 					name='firstName'
-	// 					label='First Name'
-	// 					handleChange={handleChange}
-	// 					variant='outlined'
-	// 					autoFocus
-	// 					fullwidth
-	// 				/>
-	// 				<TextField
-	// 					name='lastName'
-	// 					label='Last Name'
-	// 					handleChange={handleChange}
-	// 					variant='outlined'
-	// 					autoFocus
-	// 					fullwidth
-	// 				/>
-	// 				<TextField
-	// 					name='email'
-	// 					label='Email'
-	// 					handleChange={handleChange}
-	// 					variant='outlined'
-	// 					autoFocus
-	// 					fullwidth
-	// 				/>
-	// 				<TextField
-	// 					name='password'
-	// 					label='Password'
-	// 					handleChange={handleChange}
-	// 					variant='outlined'
-	// 					autoFocus
-	// 					fullwidth
-	// 				/>
-	// 				<TextField
-	// 					name='confirmPassword'
-	// 					label='Confirm Password'
-	// 					handleChange={handleChange}
-	// 					variant='outlined'
-	// 					autoFocus
-	// 					fullwidth
-	// 				/>
-	// 			</Container>
-	// 			<Container>
-	// 				<Button
-	// 					type='submit'
-	// 					fullwidth
-	// 					variant='contained'
-	// 					color='primary'>
-	//                         Sign Up
-	//                     </Button>
-	// 			</Container>
-	// 			<Container>
-	// 				<h4>
-	// 					Already a user? <span>Log In</span>!
-	// 				</h4>
-	// 			</Container>
-	// 		</div>
-	// 	);
-	// } else {
-	// 	return (
-	// 		// Show loginform
-	// 		<div>
-	// 			<Container>
-	// 				<TextField
-	// 					name='email'
-	// 					label='Email'
-	// 					handleChange={handleChange}
-	// 					variant='outlined'
-	// 					autoFocus
-	// 					fullwidth
-	// 				/>
-	// 				<TextField
-	// 					name='password'
-	// 					label='Password'
-	// 					Log
-	// 					In
-	// 					handleChange={handleChange}
-	// 					variant='outlined'
-	// 					autoFocus
-	// 					fullwidth
-	// 				/>
-	// 			</Container>
-	// 			<Container>
-	// 				<Button
-	// 					type='submit'
-	// 					fullwidth
-	// 					variant='contained'
-	// 					color='primary'></Button>
-	// 			</Container>
-	// 			<Container>
-	// 				<h4>
-	// 					Don't have an account? <span>Sign Up</span> here!
-	// 				</h4>
-	// 			</Container>
-	// 		</div>
-	// );
-	// }
 };
 
 export default Form;
