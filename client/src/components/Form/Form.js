@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import useStyles from './styles';
 import Input from './Input';
@@ -28,6 +29,8 @@ const Form = () => {
 	}
 
 	const handleChange = () => { };
+
+
 	const classes = useStyles();
 
 	return (
@@ -54,7 +57,7 @@ const Form = () => {
 							</Fragment>
 						)}
 						</Grid>
-						<Button type='submit' fullwidth variant='contained' color='primary' className={classes.submit}>
+					<Button type='submit' fullwidth variant='contained' color='primary' className={classes.submit} component={Link} to='/home' >
 							{!isSignedUp ? 'Sign Up' : 'Sign In'}
 						</Button>
 						<Grid container justify="flex-end">
